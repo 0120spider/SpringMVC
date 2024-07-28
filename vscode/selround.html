@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url('ptcture/wallhaven-96151x.jpg'); 
+            background-color: rgb(248, 185, 103);
+            font-family: Arial, sans-serif;
+        }
+        div.ticket{
+            width:80%;
+            margin: auto;
+            background-color: rgb(239, 191, 124);
+            padding: 20px;
+            font-size: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        thead tr{
+            background-color: cyan;
+            text-align: center;
+            font-weight: bolder;
+        }
+        div.ticket h3{
+            text-align: center;
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        select, input[type="date"], button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <h3>查询会议</h3>
+        <p>
+            参会人员姓名：<select name="movieId" id="movieId"></select>
+            日期：<input type="date" name="date" id="date">
+            <button id="btnSearch">查询</button>
+        </p>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <td>编号</td>
+                    <td>会议厅</td>
+                    <td>开场时间</td>
+                    <td>散场时间</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hide">
+                    <td>编号</td>
+                    <td>大厅</td>
+                    <td>开场时间</td>
+                    <td>散场时间</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./lib/base.js"></script>
+<script>
+    // 1 页面初始化的方法
+    function init() {
+        // 1 查询出所有没有下架的电影
+        $.get(basePath + "/movie/allactivemovie",null,function(r){
+            // console.log(r)
+            $(r.data).each(function(index,obj){
+                // 1 创建里面的选项
+                var $op = $("<option></option>")
+                $op.val(obj.movieId)
+                $op.html(obj.movieName)
+                $("#movieId").append($op)
+            })
+        },"json")
+    }
+    // 2 调用页面初始化的方法
+    init()
+
+    // 3 查询button 点击事件
+    $("#btnSearch").on('click',function(){
+        // 1 发出ajax 请求 查询场次
+        var url = basePath + "/movie/selround"
+        var pdata = {}
+        pdata.movieId = $("#movieId").val()
+        pdata.date = $("#date").val()+" 00:00"
+        $.get(url,pdata,function(r){
+            console.log(r)
+            if(r.code!=='200'){
+                return alert(r.message)
+            }
+            // 在table 上一行一行的把场次加进去
+            $(r.data).each(function(index,obj){
+                // clone 空行
+                var $tr = $("tr.hide").clone()
+                $tr.find("td:first").html(index+1)
+                $tr.find("td:eq(1)").html(obj.hourseName)
+                $tr.find("td:eq(2)").html(obj.roundStart)
+                $tr.find("td:eq(3)").html(obj.roundEnd)
+                $tr.find("td:eq(4)").html(obj.roundPrice)
+                $tr.find("td a").attr("href","selseat.html?roundid="+obj.roundId)
+                $tr.removeClass("hide")
+                $("tbody").append($tr)
+            })
+            
+        },"json")
+    })
+</script>
+</html>

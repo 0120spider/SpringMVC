@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   
+   <style>
+       div.ticket{
+           width: 80%;
+           margin: auto;
+       }
+       h3{
+           text-align: center;
+       }
+       div.seat{
+           width: 50%;
+           margin: auto;
+           text-align: center;
+       }
+       div.ticket p{
+           text-align: center;
+           
+       }
+    input[type='checkbox']:checked {
+        background: #007BFF;
+    }
+   </style>
+   
+</head>
+<body>
+   <div class="ticket">
+       <h3>选座位页面</h3>
+       <div class="seat">
+           
+       </div>
+       <p><button id="btnok">确定</button></p>
+   </div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./lib/base.js"></script>
+<script>
+   // 1: "selseat.html?roundid=1
+   // 1 要获得地址栏后面的场次id
+   // 网络上抄的 用js 去获得路径中传来的参数
+   function getQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+   }
+   // 获得场次id
+   var roundid = getQueryString("roundid")
+   //alert(roundid)
+   // 根据场次id 去查询这一场的票的情况
+   var url = basePath + "/movie/ticket/"+roundid
+   // 定义一个变量 这个变量用来存取 用户勾选的id
+   var selTickets = []
+   $.get(url,null, function(r){
+       console.log(r)
+       // 1 遍历返回的数据
+       $(r.data).each(function(index,obj){
+           // 2 创建一个勾选框
+           var $cb = $("<input type='checkbox'>")
+           $cb.val(obj.ticketId)
+           if(obj.ticketStatus==="1"){
+               $cb.attr("checked",true)
+               $cb.attr("disabled",true)
+           }
+           // checkbox 的 勾选改变事件
+           $cb.on('change',function(){
+               // alert(this.checked + ":" + this.value)
+               if(this.checked===true){
+                   selTickets.push(new Number(this.value))
+               }else{
+                   selTickets = selTickets.filter(item=>item!=this.value)
+               }
+               console.log(selTickets)
+           })
+           $("div.seat").append($cb)
+           if(obj.seatType===3){
+               $("div.seat").append($("<br>"))
+           }
+
+       })
+   },"json")
+
+
+   // btn点击事件
+   $("#btnok").on('click',function(){
+       // 要往后端发出请求
+       var url = basePath + "/movie/addorder"
+       var pdata = {}
+       pdata.roundId = roundid
+       pdata.selTickets = selTickets
+        // 1 页面一张开 就去sessionstoage 中取值
+        var strjson = sessionStorage.getItem("userinfo")
+       // 2 把字符串转成json 对象
+       var user = JSON.parse(strjson)
+       pdata.userId = user.userId
+
+       // 3 发出请求
+       $.get(url,pdata,function(r){
+           alert(r.message)
+       },"json")
+
+   })
+</script>
+</html>

@@ -1,0 +1,40 @@
+# \u9700\u8981\u4EC0\u4E48\u5C31\u5F80\u91CC\u9762\u914D\u7F6E\u4EC0\u4E48  mybatis \u914D\u7F6E
+spring:
+  datasource:
+    druid:
+      url:  jdbc:mysql://192.168.168.139:3306/work?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      driver-class-name:  com.mysql.jdbc.Driver
+      username:  root
+      password:  root
+      initial-size:  10
+      max-active:  50
+      min-idle:  10
+      max-wait:  60000
+      pool-prepared-statements:  true
+      max-pool-prepared-statement-per-connection-size:  20
+      validation-query:  SELECT 1 FROM DUAL
+  mvc:
+    format:
+      date: yyyy-MM-dd HH:mm
+
+# mybatis\u3000\u76F8\u5173\u3000\uFF58\uFF4D\uFF4C\u6587\u4EF6\u5728\u54EA\u91CC\u3000\u9A7C\u5CF0\u3000\u3000\u5206\u9875\u63D2\u4EF6\u3000\u6253\u5370\uFF53\uFF51\uFF4C\u8BED\u53E5\u7684\u65E5\u5FD7
+mybatis:
+  # \u626B\u63CF\u6620\u5C04\u6587\u4EF6
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # \u5F00\u542F\u9A7C\u5CF0\u6620\u5C04\u914D\u7F6E
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments:  true
+  params: count=countSql
+
+# \u6253\u5370sqk
+logging:
+  level:
+    com.qf.movie.mapper: debug
+
+server:
+  port: 9080

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(248, 185, 103);
+        }
+        div.round{
+        
+            width: 80%;
+            margin: auto;
+        }
+        div.round h3{
+            text-align: center;
+        }
+        div.round p{
+            text-align: center;
+        }
+        .line{
+            display:inline-block;
+            width: 170px;
+        }
+    </style>
+</head>
+<body>
+    <div class="round">
+        <h3>选择会议场所</h3>
+        <p>选择会议厅: <select name="hourseId" id="hourseId" class="line"></select></p>
+        <p>参加人员: <select name="movieId" id="movieId" class="line"></select></p>
+        <p>开始时间: <input type="datetime-local" name="roundStart" id="roundStart" class="line"></p>
+        <!-- <p>票　　价: <input type="text" name="roundPrice" id="roundPrice" class="line"></p> -->
+        <p><button>添加</button></p>
+    </div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./lib/base.js"></script>
+<script>
+    // 页面初始化函数
+    function init(){
+        // 1 查询所有的大厅
+        $.get(basePath + "/movie/allhourse",null,function(r){
+            // console.log(r)
+            $(r.data).each(function(index,obj){
+                // 1 创建里面的选项
+                var $op = $("<option></option>")
+                $op.val(obj.hourseId)
+                $op.html(obj.hourseName)
+                $("#hourseId").append($op)
+            })
+        },"json")
+
+        // 2 查询所有的电影
+        $.get(basePath + "/movie/allactivemovie",null,function(r){
+            // console.log(r)
+            $(r.data).each(function(index,obj){
+                // 1 创建里面的选项
+                var $op = $("<option></option>")
+                $op.val(obj.movieId)
+                $op.html(obj.movieName)
+                $("#movieId").append($op)
+            })
+        },"json")
+    }
+    // 调用页面初始化函数
+    init()
+
+    // button 被点击的事件的处理
+    $("button").on("click",function(){
+        var url =  basePath + '/movie/addround'
+        var pdata = {}
+        pdata.hourseId = $("#hourseId").val()
+        pdata.movieId = $("#movieId").val()
+        pdata.roundStart = $("#roundStart").val().replace("T"," ")
+        pdata.roundPrice = $("#roundPrice").val()
+
+        $.get(url,pdata,function(r){
+            alert(r.message)
+        },"json")
+    })
+</script>
+
+</html>

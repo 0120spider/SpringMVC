@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 使用的插件核心思想 就是把普通的标签 渲染成某种特效插件-->
+    <div id="container" ></div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./script/base.js"></script>
+<script src="https://code.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="https://code.hcharts.cn/highcharts/modules/exporting.js"></script>
+<script src="https://code.hcharts.cn/plugins/zh_cn.js"></script>
+<script>
+
+
+    function creatPie(title,data){
+         // Highcharts.chart(参数1，参数2)
+    // 参数1：  我要把谁渲染成 Highcharts报表
+    // 参数2：  报表的数据
+   Highcharts.chart('container', {
+        chart: { 
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: title
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: data
+        }]
+    });
+    }
+
+    var url = "http://localhost:8080/province/report"
+    $.get(url,null,function(r){
+        creatPie('各省会城市所占比例',r)
+    },"json")
+   
+</script>
+</html>

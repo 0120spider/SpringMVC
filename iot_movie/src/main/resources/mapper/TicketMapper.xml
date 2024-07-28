@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.movie.mapper.TicketMapper" >
+  <resultMap id="BaseResultMap" type="com.qf.movie.entity.Ticket" >
+    <id column="ticket_id" property="ticketId" jdbcType="INTEGER" />
+    <result column="round_id" property="roundId" jdbcType="INTEGER" />
+    <result column="movie_id" property="movieId" jdbcType="INTEGER" />
+    <result column="hourse_id" property="hourseId" jdbcType="INTEGER" />
+    <result column="round_price" property="roundPrice" jdbcType="DECIMAL" />
+    <result column="seat_id" property="seatId" jdbcType="INTEGER" />
+    <result column="ticket_row" property="ticketRow" jdbcType="INTEGER" />
+    <result column="ticket_clounm" property="ticketClounm" jdbcType="INTEGER" />
+    <result column="ticket_status" property="ticketStatus" jdbcType="CHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ticket_id, round_id, movie_id, hourse_id, round_price, seat_id, ticket_row, ticket_clounm, 
+    ticket_status, version
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qf.movie.entity.TicketExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket
+    where ticket_id = #{ticketId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket
+    where ticket_id = #{ticketId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qf.movie.entity.TicketExample" >
+    delete from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qf.movie.entity.Ticket" >
+    insert into ticket (ticket_id, round_id, movie_id, 
+      hourse_id, round_price, seat_id, 
+      ticket_row, ticket_clounm, ticket_status, 
+      version)
+    values (#{ticketId,jdbcType=INTEGER}, #{roundId,jdbcType=INTEGER}, #{movieId,jdbcType=INTEGER}, 
+      #{hourseId,jdbcType=INTEGER}, #{roundPrice,jdbcType=DECIMAL}, #{seatId,jdbcType=INTEGER}, 
+      #{ticketRow,jdbcType=INTEGER}, #{ticketClounm,jdbcType=INTEGER}, #{ticketStatus,jdbcType=CHAR}, 
+      #{version,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.movie.entity.Ticket" >
+    insert into ticket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ticketId != null" >
+        ticket_id,
+      </if>
+      <if test="roundId != null" >
+        round_id,
+      </if>
+      <if test="movieId != null" >
+        movie_id,
+      </if>
+      <if test="hourseId != null" >
+        hourse_id,
+      </if>
+      <if test="roundPrice != null" >
+        round_price,
+      </if>
+      <if test="seatId != null" >
+        seat_id,
+      </if>
+      <if test="ticketRow != null" >
+        ticket_row,
+      </if>
+      <if test="ticketClounm != null" >
+        ticket_clounm,
+      </if>
+      <if test="ticketStatus != null" >
+        ticket_status,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ticketId != null" >
+        #{ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="roundId != null" >
+        #{roundId,jdbcType=INTEGER},
+      </if>
+      <if test="movieId != null" >
+        #{movieId,jdbcType=INTEGER},
+      </if>
+      <if test="hourseId != null" >
+        #{hourseId,jdbcType=INTEGER},
+      </if>
+      <if test="roundPrice != null" >
+        #{roundPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="seatId != null" >
+        #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketRow != null" >
+        #{ticketRow,jdbcType=INTEGER},
+      </if>
+      <if test="ticketClounm != null" >
+        #{ticketClounm,jdbcType=INTEGER},
+      </if>
+      <if test="ticketStatus != null" >
+        #{ticketStatus,jdbcType=CHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qf.movie.entity.TicketExample" resultType="java.lang.Integer" >
+    select count(*) from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ticket
+    <set >
+      <if test="record.ticketId != null" >
+        ticket_id = #{record.ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roundId != null" >
+        round_id = #{record.roundId,jdbcType=INTEGER},
+      </if>
+      <if test="record.movieId != null" >
+        movie_id = #{record.movieId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hourseId != null" >
+        hourse_id = #{record.hourseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roundPrice != null" >
+        round_price = #{record.roundPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.seatId != null" >
+        seat_id = #{record.seatId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketRow != null" >
+        ticket_row = #{record.ticketRow,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketClounm != null" >
+        ticket_clounm = #{record.ticketClounm,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketStatus != null" >
+        ticket_status = #{record.ticketStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ticket
+    set ticket_id = #{record.ticketId,jdbcType=INTEGER},
+      round_id = #{record.roundId,jdbcType=INTEGER},
+      movie_id = #{record.movieId,jdbcType=INTEGER},
+      hourse_id = #{record.hourseId,jdbcType=INTEGER},
+      round_price = #{record.roundPrice,jdbcType=DECIMAL},
+      seat_id = #{record.seatId,jdbcType=INTEGER},
+      ticket_row = #{record.ticketRow,jdbcType=INTEGER},
+      ticket_clounm = #{record.ticketClounm,jdbcType=INTEGER},
+      ticket_status = #{record.ticketStatus,jdbcType=CHAR},
+      version = #{record.version,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.movie.entity.Ticket" >
+    update ticket
+    <set >
+      <if test="roundId != null" >
+        round_id = #{roundId,jdbcType=INTEGER},
+      </if>
+      <if test="movieId != null" >
+        movie_id = #{movieId,jdbcType=INTEGER},
+      </if>
+      <if test="hourseId != null" >
+        hourse_id = #{hourseId,jdbcType=INTEGER},
+      </if>
+      <if test="roundPrice != null" >
+        round_price = #{roundPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="seatId != null" >
+        seat_id = #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketRow != null" >
+        ticket_row = #{ticketRow,jdbcType=INTEGER},
+      </if>
+      <if test="ticketClounm != null" >
+        ticket_clounm = #{ticketClounm,jdbcType=INTEGER},
+      </if>
+      <if test="ticketStatus != null" >
+        ticket_status = #{ticketStatus,jdbcType=CHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ticket_id = #{ticketId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.movie.entity.Ticket" >
+    update ticket
+    set round_id = #{roundId,jdbcType=INTEGER},
+      movie_id = #{movieId,jdbcType=INTEGER},
+      hourse_id = #{hourseId,jdbcType=INTEGER},
+      round_price = #{roundPrice,jdbcType=DECIMAL},
+      seat_id = #{seatId,jdbcType=INTEGER},
+      ticket_row = #{ticketRow,jdbcType=INTEGER},
+      ticket_clounm = #{ticketClounm,jdbcType=INTEGER},
+      ticket_status = #{ticketStatus,jdbcType=CHAR},
+      version = #{version,jdbcType=BIGINT}
+    where ticket_id = #{ticketId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selTicketByRoundid" resultType="com.qf.movie.entity.vo.TicketVO">
+    select ticket.*,seat.seat_type from ticket join seat
+    on ticket.seat_id = seat.seat_id
+    where round_id=#{roundId}
+  </select>
+</mapper>

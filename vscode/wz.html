@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("ptcture/OIG (3).jfif");
+  background-position: 120px -120px;
+}
+.table {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+.seat {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #999;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.seat img {
+  display: none;
+  width: 20px;
+  height: 20px;
+}
+.seat:nth-child(1) { top: -50px; left: 125px; }
+.seat:nth-child(2) { top: 125px; right: -50px; }
+.seat:nth-child(3) { bottom: -50px; left: 125px; }
+.seat:nth-child(4) { top: 125px; left: -50px; }
+.seat:nth-child(5) { top: 0; left: 0; }
+.seat:nth-child(6) { top: 0; right: 0; }
+.seat:nth-child(7) { bottom: 0; left: 0; }
+.seat:nth-child(8) { bottom: 0; right: 0; }
+</style>
+<script>
+window.onload = function() {
+  var seats = document.getElementsByClassName('seat');
+  for (var i = 0; i < seats.length; i++) {
+    seats[i].addEventListener('click', function() {
+      var img = this.getElementsByTagName('img')[0];
+      if (img.style.display === 'none') {
+        img.style.display = 'block';
+        this.style.backgroundColor = '#0ff4f4';
+      } else {
+        img.style.display = 'none';
+        this.style.backgroundColor = '#999';
+      }
+    });
+  }
+};
+</script>
+</head>
+<body>
+<div class="table">
+  <div class="seat"><img src="img\点赞.png"></div>
+  <div class="seat"><img src="img\点赞.png"></div>
+  <div class="seat"><img src="img\点赞.png"></div>
+  <div class="seat"><img src="img\点赞.png"></div>
+  <div class="seat"><img src="img\点赞.png"></div>
+  <div class="seat"><img src="img\点赞.png"></div>
+  <div class="seat"><img src="img\点赞.png"></div>
+  <div class="seat"><img src="img\点赞.png"></div>
+</div>
+</body>
+</html>

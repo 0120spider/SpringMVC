@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(247, 205, 150);
+        }
+        div.addmovie{
+        
+            width: 80%;
+            margin: auto;
+        }
+        div.addmovie h3{
+            text-align: center;
+        }
+        div.addmovie p{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="addmovie">
+        <h3>添加会议人员</h3>
+        <p>名　　字: <input type="text" name="movieNamme" id="movieName"></p>
+        <p>性　　别: <input type="text" name="moviePic" id="moviePic"></p>
+        <p>会议时长: <input type="text" name="movieLength" id="movieLength" class="line"></p>
+        <p>开始时间: <input type="datetime-local" name="movieStart" id="movieStart" class="line"></p>
+        <p>结束时间: <input type="datetime-local" name="movieEnd" id="movieEnd" class="line"></p>
+        <p><button>确定</button></p>
+    </div> 
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./lib/base.js"></script>
+<script>
+    $("button").on('click',function(){
+        // 1 收集参数
+        var pdata = {}
+        pdata.movieName = $("#movieName").val()
+        pdata.moviePic = $("#moviePic").val()
+        pdata.movieLength = $("#movieLength").val()
+        // 由于h5 的datatime-local 值中带有T 我们把T 替换成空格
+        pdata.movieStart = $("#movieStart").val().replace("T"," ")
+        pdata.movieEnd = $("#movieEnd").val().replace("T"," ")
+        var url = basePath + "/movie/add"
+        // 2 发请求给接口
+        $.get(url,pdata,function(r){
+            // 3 成功或者失败都提示使用用户
+            alert(r.message)
+        },"json")
+    })
+</script>
+</html>

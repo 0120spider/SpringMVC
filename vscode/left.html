@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <style>
+            body {
+				background-color: #ADD8E6;
+                background-image: url('ptcture/IM1.jpg'); 
+                font-size: 29px; 
+                color: #0f0202a1;
+			}
+            .cloneli{
+                display: none;
+            }
+            /* Add a hover effect */
+            .menu-item:hover {
+                background-color: #37f0e7;
+                cursor: pointer;
+            }
+            /* Add a dazzling color effect */
+            .menu-item a {
+                background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+          
+        </style>
+	</head>
+	<body>
+		<div style="position:absolute;left:30px;top:30px">
+			<div class="menu">
+			    <div class="menu-item cloneli"><h3><a href="page2.html" target="rightFrame"></a></h3></div>
+			</div>
+		</div>
+	</body>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="./lib/base.js"></script>
+    <script>
+        // 1 left,html 一展示出来 要根据当前的角色 判断显示什么样的菜单
+        // 1 页面一张开 就去sessionstoage 中取值
+        var strjson = sessionStorage.getItem("userinfo")
+        // 2 把字符串转成json 对象
+        var user = JSON.parse(strjson)
+
+        // 3 先放入报表
+        var $li = $("div.menu-item.cloneli").clone()
+        $li.find("a").attr("href","sp.html").text("使用教程")
+        $li.removeClass("cloneli")
+        $("div.menu").append($li)
+        // 4 如果是admin 角色
+        if(user.role==='admin'){
+            var $li01 = $("div.menu-item.cloneli").clone()
+            $li01.find("a").attr("href","movie.html").text("添加参会人员")
+            var $li02 = $("div.menu-item.cloneli").clone()
+            $li02.find("a").attr("href","round.html").text("添加场次")
+            $li01.removeClass("cloneli")
+            $li02.removeClass("cloneli")
+            $("div.menu").append($li01)
+            $("div.menu").append($li02)
+        }else if(user.role==='user'){
+            var $li01 = $("div.menu-item.cloneli").clone()
+            $li01.find("a").attr("href","selround.html").text("查询会议")
+            var $li02 = $("div.menu-item.cloneli").clone()
+            $li02.find("a").attr("href","wz.html").text("会议选座")
+            $li01.removeClass("cloneli")
+            $li02.removeClass("cloneli")
+            $("div.menu").append($li01)
+            $("div.menu").append($li02)
+        }else{
+            var $li01 = $("div.menu-item.cloneli").clone()
+            $li01.find("a").attr("href","zw.html").text("111")
+            var $li02 = $("div.menu-item.cloneli").clone()
+            $li02.find("a").attr("href","order.html").text("1111")
+            $li01.removeClass("cloneli")
+            $li02.removeClass("cloneli")
+            $("div.menu").append($li01)
+            $("div.menu").append($li02)
+        }
+    </script>
+</html>

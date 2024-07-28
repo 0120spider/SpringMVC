@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>top</title>
+        <style>
+            body{
+                background-color: antiquewhite;
+                background-image: url('ptcture/OIP-C.jpg'); 
+            }
+            div.top{
+               display: flex; 
+            }
+            div.top div{
+                flex: 1;
+            }
+            div.user{
+                text-align: right;
+                padding-top: 30px;
+            }
+           
+            #btnLogout {
+                background-color: #35f90a; 
+                color: white; 
+                padding: 12px 24px; 
+                border: none; 
+                cursor: pointer; 
+                border-radius: 5px;
+                text-decoration: none; 
+            }
+            #btnLogout:hover {
+                background-color: #ec06ca; 
+            }
+            div.user span {
+                color: #08d6c1; 
+                font-weight: bold; 
+                font-size: 30px; 
+                margin-right: 10px;
+            }
+        </style>
+	</head>
+	<body >
+		<div class="top">
+            <div class="logo">
+                <img src="ptcture\logo.png" alt="">
+            </div>
+            <div class="user">
+                <span>test001</span>
+                <span>admin</span>
+                <a href="login.html" target="_top" id="btnLogout">ESC</a>
+            </div>
+        </div>
+	</body>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="./lib/base.js"></script>
+    <script>
+        // 1 页面一张开 就去sessionstoage 中取值
+        var strjson = sessionStorage.getItem("userinfo")
+        // 2 把字符串转成json 对象
+        var user = JSON.parse(strjson)
+        $("div.user span:first").html(user.userName)
+        $("div.user span:last").html(user.role)
+
+        // 2 注销button 被点击事件
+        $("#btnLogout").on('click',function(){
+            // 1 清空sessionstoage
+            sessionStorage.removeItem("userinfo")
+        })
+    </script>
+</html>

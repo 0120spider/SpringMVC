@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("ptcture/3323.jpg"); /* 替换 'your-image.jpg' 为你的背景图片路径 */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+           align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background-color: rgba(133, 250, 232, 0.8); 
+            width: 300px; /* 登录界面的宽度 */
+            padding: 20px;
+            border-radius: 10px;
+			margin-left: 630px;
+			position: absolute;
+        }  
+        .login-container h2 {
+            font-size: 24px;
+        }
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login-container input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+		#blue{
+			color: red;
+			text-align: center;
+			border: #007bff;
+			width: 300px;
+			background-color: aqua;
+			border-radius: 10px;
+		}
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>用户登陆</h2>
+        <form action="login.php" method="post"> 
+		<p>
+			 <img src="ptcture\用户.png" width="20px" height="20px"><input type="text" id="userName" >
+		</p>          
+          <p>
+			  <img src="ptcture\锁.png" width="20px" height="20px"><input type="password" id="userPassword" >
+		  </p>  
+			<p><input type="checkbox"/>记住账号             忘记密码</p>
+           <button id="btnLogin" style="padding: 10px 0; background-color: #007BFF; color: white; border: none; cursor: pointer;">登陆</button>
+
+			<p>
+				合作网登陆<img src="ptcture\QQ.png"  width="20px" height="20px">　　　　<img src="ptcture\微信.png" width="20px" height="20px">　　　　<img src="ptcture\微博.png" width="20px" height="20px">
+      
+			</p>			 
+    </div>
+</body>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./lib/base.js"></script>
+<script>
+   $("#btnLogin").on('click',function(){
+       // 1 发出ajax 请求给后端的接口
+       var url = basePath + "/user/login"
+       var pdata = {
+           "userName": $("#userName").val(),
+           "userPassword": $("#userPassword").val()
+       }
+       $.get(url,pdata,function(r){
+      //  console.log(r)
+           // 1 如果登录不成功 要提示
+           if(r.code!=='200'){
+               
+              return alert(r.message)
+           }
+           // 2 登录成功 要把登录用户的信息保存在SessionStoage 对象（h5才有）
+           // 2.1 把r.data 对象转成json 字符串再保存到sessionstoage 中 h5
+           var strJson = JSON.stringify(r.data)
+           sessionStorage.setItem("userinfo",strJson)
+           // 2.2 跳转到首页
+          // window.location.href = "index.html"
+          window.location.href = "text1.html"
+       },"json")
+   })
+</script>
+</html>

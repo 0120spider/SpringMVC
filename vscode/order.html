@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            div.my{
+                width:80%;
+                margin: auto;
+            }
+            table{
+                width: 100%;
+            }
+            td{
+                border: 1px black solid;
+            }
+            thead tr{
+                background-color: cyan;
+                text-align: center;
+                font-weight: bolder;
+            }
+            div.my h2{
+                text-align: center;
+            }
+            .hide{
+                display: none;
+            }
+        </style>
+       </head>
+       <body>
+        <div class="my">
+            <h2>我的订单</h2>
+            <p>
+                订单状态: <select id="status">
+                    <option value="-1">全部状态</option>
+                    <option value="0">未支付</option>
+                    <option value="1">已经支付</option>   
+                </select>
+                <button id="btnok">查询</button>
+            </p>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <td>编号</td>
+                        <td>发生日期</td>
+                        <td>支付日期</td>
+                        <td>订单价格</td>
+                        <td>订单状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr class="hide">
+                        <td>编号</td>
+                        <td>发生日期</td>
+                        <td>支付日期</td>
+                        <td>订单价格</td>
+                        <td>订单状态</td>
+                        <td><a href="">支付</a></td>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                </tbody>
+            </table>
+        </div>
+       </body>
+       <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./lib/base.js"></script>
+<script>
+   function getOrders(){
+       // 1 页面一张开 就去sessionstoage 中取值
+       var strjson = sessionStorage.getItem("userinfo")
+       // 2 把字符串转成json 对象
+       var user = JSON.parse(strjson)
+       var url = basePath + "/movie/myorders"
+       var pdata ={}
+       pdata.userId =user.userId
+       pdata.status = $("#status").val()
+       $.get(url,pdata,function(r){
+           console.log(r)
+           // 清空tbody
+           $("tbody").empty()
+           if(r.code!=='200'){
+               return alert(r.message)
+           }
+           
+           // 一行一行订单添加到页面
+           $(r.data).each(function(index,obj){
+               var $tr = $("tr.hide").clone()
+               $tr.find("td:first").html(obj.orderId)
+               $tr.find("td:eq(1)").html(obj.createTime)
+               $tr.find("td:eq(2)").html(obj.payTime)
+               $tr.find("td:eq(3)").html(obj.orderPrice)
+               if(obj.orderStatus==='0'){
+                   $tr.find("td:eq(4)").html('未支付')
+                   
+               }else{
+                   $tr.find("td:eq(4)").html('已支付')
+                   $tr.find("td:eq(5) a").html('查看')
+               }
+               $tr.removeClass("hide")
+               $("tbody").append($tr)
+           })
+       },"json")
+   }
+
+   // 一进入页面就要获得订单
+   getOrders();
+
+   // [确定]button 被点击动作
+   $("#btnok").on('click',function(){
+       getOrders();
+   })
+</script>
+</html>

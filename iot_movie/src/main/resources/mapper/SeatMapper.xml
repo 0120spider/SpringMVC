@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.movie.mapper.SeatMapper" >
+  <resultMap id="BaseResultMap" type="com.qf.movie.entity.Seat" >
+    <id column="seat_id" property="seatId" jdbcType="INTEGER" />
+    <result column="hourse_id" property="hourseId" jdbcType="INTEGER" />
+    <result column="seat_row" property="seatRow" jdbcType="INTEGER" />
+    <result column="seat_clounm" property="seatClounm" jdbcType="INTEGER" />
+    <result column="seat_type" property="seatType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seat_id, hourse_id, seat_row, seat_clounm, seat_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qf.movie.entity.SeatExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from seat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from seat
+    where seat_id = #{seatId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from seat
+    where seat_id = #{seatId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qf.movie.entity.SeatExample" >
+    delete from seat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qf.movie.entity.Seat" >
+    insert into seat (seat_id, hourse_id, seat_row, 
+      seat_clounm, seat_type)
+    values (#{seatId,jdbcType=INTEGER}, #{hourseId,jdbcType=INTEGER}, #{seatRow,jdbcType=INTEGER}, 
+      #{seatClounm,jdbcType=INTEGER}, #{seatType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.movie.entity.Seat" >
+    insert into seat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seatId != null" >
+        seat_id,
+      </if>
+      <if test="hourseId != null" >
+        hourse_id,
+      </if>
+      <if test="seatRow != null" >
+        seat_row,
+      </if>
+      <if test="seatClounm != null" >
+        seat_clounm,
+      </if>
+      <if test="seatType != null" >
+        seat_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seatId != null" >
+        #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="hourseId != null" >
+        #{hourseId,jdbcType=INTEGER},
+      </if>
+      <if test="seatRow != null" >
+        #{seatRow,jdbcType=INTEGER},
+      </if>
+      <if test="seatClounm != null" >
+        #{seatClounm,jdbcType=INTEGER},
+      </if>
+      <if test="seatType != null" >
+        #{seatType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qf.movie.entity.SeatExample" resultType="java.lang.Integer" >
+    select count(*) from seat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update seat
+    <set >
+      <if test="record.seatId != null" >
+        seat_id = #{record.seatId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hourseId != null" >
+        hourse_id = #{record.hourseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.seatRow != null" >
+        seat_row = #{record.seatRow,jdbcType=INTEGER},
+      </if>
+      <if test="record.seatClounm != null" >
+        seat_clounm = #{record.seatClounm,jdbcType=INTEGER},
+      </if>
+      <if test="record.seatType != null" >
+        seat_type = #{record.seatType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update seat
+    set seat_id = #{record.seatId,jdbcType=INTEGER},
+      hourse_id = #{record.hourseId,jdbcType=INTEGER},
+      seat_row = #{record.seatRow,jdbcType=INTEGER},
+      seat_clounm = #{record.seatClounm,jdbcType=INTEGER},
+      seat_type = #{record.seatType,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.movie.entity.Seat" >
+    update seat
+    <set >
+      <if test="hourseId != null" >
+        hourse_id = #{hourseId,jdbcType=INTEGER},
+      </if>
+      <if test="seatRow != null" >
+        seat_row = #{seatRow,jdbcType=INTEGER},
+      </if>
+      <if test="seatClounm != null" >
+        seat_clounm = #{seatClounm,jdbcType=INTEGER},
+      </if>
+      <if test="seatType != null" >
+        seat_type = #{seatType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seat_id = #{seatId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.movie.entity.Seat" >
+    update seat
+    set hourse_id = #{hourseId,jdbcType=INTEGER},
+      seat_row = #{seatRow,jdbcType=INTEGER},
+      seat_clounm = #{seatClounm,jdbcType=INTEGER},
+      seat_type = #{seatType,jdbcType=INTEGER}
+    where seat_id = #{seatId,jdbcType=INTEGER}
+  </update>
+</mapper>

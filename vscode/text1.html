@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>搜索页面</title>
+    <style>
+		#one {
+            font-size: 30px; /* 你可以根据需要调整这个值 */
+			color: rebeccapurple;
+        }
+        body {
+            background-image: url("ptcture/wallhaven-ymdjpg.jpg");
+			 overflow-y: auto;
+        }
+        #body {
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #top {
+            position: absolute;
+            top: 19%;
+        }
+
+        #one {
+            width: 500px;
+            height: 50px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            color: black;
+        }
+
+        #one1 {
+            border: 0px;
+            width: 60px;
+			font-size: 20px;
+            height: 60px;
+            color: red;
+			border-radius: 20px;
+        }
+
+        button {
+            height: 36px;
+            background-color: skyblue;
+            color: red;
+        }
+
+        .add {
+            top: 40%;
+            left: 17%;
+            position: absolute;
+        }
+        .add1 {
+            top: 40%;
+            left: 37%;
+            position: absolute;
+        }
+
+        .add2 {
+            top: 40%;
+            left: 57%;
+            position: absolute;
+        }
+
+        .add3 {
+            top: 40%;
+            left: 77%;
+            position: absolute;
+        }
+
+        .add4 {
+            top: 60%;
+            left: 17%;
+            position: absolute;
+        }
+
+        .add5 {
+            top: 60%;
+            left: 37%;
+            position: absolute;
+        }
+		.add6 {
+		    top: 60%;
+		    left: 57%;
+		    position: absolute;
+		}
+		.add7 {
+		    top: 5%;
+		    left: 95%;
+		    position: absolute;
+		}
+		.add8 {
+		    top: 5%;
+		    left:91%;
+		    position: absolute;
+		}
+		.add9 {
+		    top: 4%;
+		    left:81%;
+		    position: absolute;
+			border: 1px;
+			width: 120px;
+			height: 40px;
+			display: inline;
+					}
+
+        .tooltip {
+            position: absolute;
+            display: none;
+            padding: 10px;
+            width: 110px;
+            top: 40%;
+            left: 17%;
+            transform: translateX(-16%);
+        }
+        .add:hover .tooltip {
+            display: block;
+        }
+		.tooltip1 {
+		    position: absolute;
+		    display: none;
+		    padding: 10px;
+		    width: 110px;
+		    top: 40%;
+			color: chartreuse; 
+		    left: 19%;
+		    transform: translateX(-10%);
+		}
+		.add1:hover .tooltip1 {
+		    display: block;
+		}
+		
+		
+		.tooltip2 {
+		    position: absolute;
+		    display: none;
+		    padding: 10px;
+		    width: 110px;
+		    top: 40%;
+			color: blue;
+		    left: 39%;
+		    transform: translateX(-18%);
+		}
+		.add2:hover .tooltip2 {
+		    display: block;
+		}
+		.tooltip3 {
+		    position: absolute;
+		    display: none;
+		    padding: 10px;
+		    width: 110px;
+		    top: 40%;
+			color: chartreuse;
+		    left: 39%;
+		    transform: translateX(-18%);
+		}
+		.add3:hover .tooltip3 {
+		    display: block;
+		}
+		.tooltip4 {
+		    position: absolute;
+		    display: none;
+		    padding: 10px;
+		    width: 110px;
+		    top: 40%;
+			color: chartreuse;
+		    left: 39%;
+		    transform: translateX(-18%);
+		}
+		.add4:hover .tooltip4 {
+		    display: block;
+		}
+		.tooltip5 {
+		    position: absolute;
+		    display: none;
+		    padding: 10px;
+		    width: 110px;
+		    top: 40%;
+			color: chartreuse;
+		    left: 39%;
+		    transform: translateX(-18%);
+		}
+		.add5:hover .tooltip5 {
+		    display: block;
+			}
+			.tooltip6 {
+			    position: absolute;
+			    display: none;
+			    padding: 10px;
+			    width: 110px;
+			    top: 40%;
+				color: chartreuse;
+			    left: 39%;
+			    transform: translateX(-18%);
+			}
+			.add6:hover .tooltip6 {
+			    display: block;
+			}
+			.tooltip7 {
+			    position: absolute;
+			    display: none;
+			    padding: 10px;
+			    width: 110px;
+			    top: 40%;
+			    color: chartreuse;
+			    left: 39%;
+			    transform: translateX(-18%);
+			}
+						
+			.add7:hover .tooltip7 {
+			    display: block;
+			}
+			
+				.tooltip8 {
+				    position: absolute;
+				    display: none;
+				    padding: 10px;
+				    width: 110px;
+				    top: 40%;
+					color: chartreuse;
+				    left: 39%;
+				    transform: translateX(-18%);
+				}
+				.add8:hover .tooltip8 {
+				    display: block;
+					}
+			.tooltip9 {
+			    position: absolute;
+			    display: none;
+			    padding: 10px;
+			    width: 110px;
+			    top: 40%;
+				color: chartreuse;
+			    left: 39%;
+			    transform: translateX(-18%);
+			}
+			.add9:hover .tooltip9 {
+			    display: block;
+			}
+			        button {
+			            height: 36px;
+			            background-color: skyblue;
+			            color: red;
+			        }
+		.box1 {
+		    width: 280px;
+			max-height: 500px; /* 设置最大高度，超过该高度将出现滚动条 */
+		    overflow-y: auto; /* 根据内容超过最大高度时显示垂直滚动条 */
+		    position: absolute;
+		   top: 10%;
+		   left: 90%;
+		    display: none;
+		    transform: translateX(-50%);
+		    background-color: #eeeeee;
+			font-size: 20px;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		    padding: 10px;
+		}
+					
+		.box1 a {
+		    display: block;
+		    color: #333;
+		    margin-bottom: 5px;
+		}
+					
+		.box1 a:hover {
+		    color: #ff6600;
+		}
+	.box2 {
+	    width: 450px;
+		height: 360px;
+	    display: none;
+	    position: absolute;
+	   top: 10%;
+	   left: 80%;
+	    transform: translateX(-50%);
+	    background-color: #f4f4f4;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    padding: 10px;
+	}
+				
+	.box2 a {
+	    display: block;
+	    color: #333;
+	    margin-bottom: 5px;
+	}
+				
+	.box2 a:hover {
+	    color: #ff6600;
+	}
+	.box3 {
+	    width: 450px;
+	    height: 360px;
+	    display: none;
+	    position: absolute;
+	   top: 10%;
+	   left: 90%;
+	    transform: translateX(-50%);
+	    background-color: #f5f5f5;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    padding: 10px;
+	}
+				
+	.box3 a {
+	    display: block;
+	    color: #333;
+	    margin-bottom: 5px;
+	}
+				
+	.box3 a:hover {
+	    color: #ff6600;
+	}
+	.yahh1{
+		width: 260px;
+		font-size: 20px;
+	}
+	.font{
+		font-size: 20px;
+	}
+        .big {
+            background-color: #ccc;
+            height: 2000px;
+            border-radius: 20px;
+            border: 0ch;
+            margin-left: 80px;
+            margin-right: 80px;		
+        }
+		.big2{
+			margin-left: 70px;
+			margin-right: 70px;
+			background-color: #f4f4f4;
+			color: #ff6600;
+			padding: 20px;
+			position: relative;
+			top: 1%;
+			width: 1200px;
+			height: 300px;
+			 border: 0ch;
+			  border-radius: 20px;
+		}
+		 .big2 a {
+		            display: block;
+					display: inline-block; 
+					white-space: nowrap;
+					margin-right: 20px; /* 为了在链接之间添加一些间距 */
+		            margin-bottom: 10px;
+		            color: #00ffff; 
+		            font-size: 16px; 
+		        }	
+		        .big2 img {
+		            margin-right: 5px;
+		            vertical-align: middle;
+		        }
+				.big3{
+					margin-left: 70px;
+					margin-right: 70px;
+					background-color: #f4f4f4;
+					color: #ff6600;
+					padding: 20px;
+					position: relative;
+					top: 4%;
+					width: 1200px;
+					height: 900px;
+					 border: 0ch;
+					  border-radius: 20px;
+				}
+				 .big3 a {
+				            display: block;
+							display: inline-block; 
+							margin-right: 20px; /* 为了在链接之间添加一些间距 */
+				            margin-bottom: 10px;
+				            color: #ffaa00; 
+							white-space: nowrap;
+				            font-size: 16px; 
+				        }
+				
+				        .big3 img {
+				            margin-right: 5px;
+				            vertical-align: middle;
+				        }
+        nav {
+            margin-top: 20px;
+			display: inline;
+        }
+
+        nav a {
+			display: inline;
+			font-size: 23px;
+            color: #000000;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+			transition: background-color 0.3s ease; 
+        }
+		 nav a:hover {  
+					border-radius: 10px;
+					color: #00ff00;
+					
+		        }
+				
+				
+    </style>
+</head>
+<body>
+
+    <div id="body">
+        <div id="top">
+            <form action="/search" method="GET">
+                <label for="one"></label>
+                <input type="text" id="one" name="q" placeholder="Hello! World">
+                <button type="submit" id="one1">搜索</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="add">
+        <a href="https://www.bilibili.com/">
+            <img src="img/哔哩哔哩.png" width="70px" height="70px" alt="哔哩哔哩">
+            <div class="tooltip">哔哩哔哩</div>
+        </a>
+    </div>
+    <div class="add1">
+        <a href="https://music.163.com/">
+            <img src="img/网易云音乐.png" width="70px" height="70px" alt="网易云音乐">
+            <div class="tooltip1">网易云</div>
+        </a>
+    </div>
+    <div class="add2">
+        <a href="https://v.qq.com/">
+            <img src="img/txvideo.png" width="70px" height="70px" alt="腾讯视频">
+            <div class="tooltip2">腾讯视频</div>
+        </a>
+    </div>
+    <div class="add3">
+        <a href="https://i.chaoxing.com/base?t=1648459432067">
+            <img src="img/11_面积性质_学.png" width="70px" height="70px" alt="学习通">
+            <div class="tooltip3">学习通</div>
+        </a>
+    </div>
+    <div class="add4">
+        <a href="book.html">
+            <img src="img/用研.png" width="70px" height="70px" alt="作者小说">
+            <div class="tooltip4">作者小说</div>
+        </a>
+    </div>
+    <div class="add5">
+        <a href="index.html">
+            <img src="img/qf.jpg" width="70px" height="70px" alt="千峰">
+            <div class="tooltip5">千锋教育</div>
+        </a>
+    </div>
+	<div class="add6">
+	    <a href="login.html">
+	        <img src="img/加.png" width="70px" height="70px" alt="动漫">
+	        <div class="tooltip6">添加网站</div>
+	    </a>
+	</div>
+	<div class="add7" onclick="toggleSettings()">
+	    <a href="#">
+	        <img src="img/设置.png" width="30px" height="30px" alt="网易云音乐">
+	        <div class="tooltip7">设置</div>
+	    </a>
+	</div>
+	<div class="add8" onclick="toggleSettings2()">
+	    <a href="#">
+	        <img src="img/提醒.png" width="30px" height="30px" alt="网易云音乐">
+	        <div class="tooltip8">设置</div>
+	    </a>
+	</div>
+	<div class="add9" onclick="toggleSettings3()">
+	    <a href="#">
+	       <div>
+			  <span>武汉市 </span><img src="img/多云.png" width="30px" height="30px" alt="网易云音乐">
+			   多云
+		   </div>
+	        <div class="tooltip9">
+				武汉市天气
+			</div>
+	    </a>
+	</div>
+	<div class="box1" id="settingsBox">
+	    <a href="#"><h2>页面设置</h2></a>
+	    <a href="#"><h3>版式</h3></a>
+		<select class="yahh1">
+			<option class="font">自定义</option>
+			<option>信息</option>
+			<option>聚焦</option>
+			<option>原始</option>
+		</select>
+		<hr />
+		<a href="#"><h3>快速链接</h3></a>
+		<select class="yahh1">
+			<option class="font">关闭</option>
+			<option>一行</option>
+			<option>俩行</option>
+			<option>顶部</option>
+			<option>关闭</option>
+		</select>
+		<form>
+			<p></p>
+			<input  type="checkbox"/>显示推广链接
+		</form>
+		<hr />
+		<a href="#"><h3>网站导航</h3></a>
+		<select class="yahh1">
+			<option class="font">关闭</option>
+			<option>打开</option>
+		</select>
+		<hr />
+		
+	   <div class="inline-container">
+	    <h3 class="inline">背景</h3>
+	    <input type="file" name="file" class="inline" accept="C:\Users\Administrator\Pictures\Camera Roll" />
+	   </div>
+	   <hr />
+	   <div class="inline-container">
+	    <h3 class="inline">自定义主题</h3>
+	    <input type="file" name="file" class="inline" accept="edge://settings/appearance" />
+	   </div>
+	   <hr />
+	   <form>
+	   <input  type="checkbox"/>显示天气
+	   <br />
+	   	<input  type="checkbox"/>新标签页提升
+		<h6>用于增强新标签页体验的新功能通知和建议</h6>
+	   </form>
+	   <hr />
+	   <a href="#"><h3>内容</h3></a>
+	   <select class="yahh1">
+	   	<option class="font">仅标题</option>
+	   	<option>全部可见</option>
+	   	<option>部分可见</option>
+	   	<option>隐藏</option>
+	   	<option>关闭</option>
+	   </select>
+	   <hr />
+	   <h6>隐私声明· 使用条款· 关于我们的广告· 帮助 ·反馈<br />
+            增值电信业务经营许可证: 合字B2-20090007<br />
+			如果你通过本页面上的链接购物，则 Microsoft 可能会获得推荐佣金。
+       </h6>
+	</div>
+	
+	<div class="box2" id="settingsBox2">
+	    <a href="#"><h2>提醒信息</h2></a>
+	    <hr />
+		<img src="img/1119.png"/>
+	    
+	</div>
+	<div class="box3" id="settingsBox3">
+	  <img src="ptcture\Sni.png"/>
+	</div>
+	
+	<script>
+	    function toggleSettings() {//触发点击
+	        var settingsBox = document.getElementById('settingsBox');
+	        settingsBox.style.display = (settingsBox.style.display === 'none' || settingsBox.style.display === '') ? 'block' : 'none';
+	    }
+	</script>
+
+
+	<script>
+		document.getElementById("one1").addEventListener("click", function(event){
+		  event.preventDefault();
+		  var input = document.getElementById("one").value;
+		  if(input === "www.千锋.com") {
+			window.location.href = "index.html";
+		  } else {
+			window.location.href = "https://www.baidu.com/";
+		  }
+		});
+		</script>
+
+	
+	<script>
+	    function toggleSettings2() {
+	        var settingsBox = document.getElementById('settingsBox2');
+	        settingsBox.style.display = (settingsBox.style.display === 'none' || settingsBox.style.display === '') ? 'block' : 'none';
+	    }
+	</script>
+	<script>
+	    function toggleSettings3() {
+	        var settingsBox = document.getElementById('settingsBox3');
+	        settingsBox.style.display = (settingsBox.style.display === 'none' || settingsBox.style.display === '') ? 'block' : 'none';
+	    }
+	</script>
+	<script>
+	    function showPage(pageId) {
+	        // 隐藏所有页面
+	        var pages = document.querySelectorAll('.big2');
+	        pages.forEach(function(page) {
+	            page.style.display = 'none';
+	        });
+	
+	        // 显示选定的页面
+	        var selectedPage = document.getElementById(pageId);
+	        if (selectedPage) {
+	            selectedPage.style.display = 'block';
+	        }
+	    }
+	</script>
+	<br />
+<div class="big">
+<header>
+    <nav>
+        <a href=" ">首页</a>
+        <a href="js/fine.html" >发现</a>
+        <a href="https://www.msn.cn/zh-cn/news?ocid=msedgntphdr&cvid=6559d2bfd93f4efaa87a9bb8fa6646ba">资讯</a>
+        <a href="https://www.msn.cn/zh-cn/sports?ocid=msedgntphdr&cvid=6559d2b162e14a4d82d6cf7dedd26e32">体育</a>
+        <a href="https://www.msn.cn/zh-cn/money?ocid=msedgntphdr&cvid=6559d2a3e57746f8a47e0caec687d346">财经</a>
+        <a href="https://www.msn.cn/zh-cn/weather/forecast/in-%E6%B9%96%E5%8C%97%E7%9C%81,%E6%B4%AA%E5%B1%B1%E5%8C%BA?ocid=msedgntphdr&cvid=6559d28ce42348aeb0c9de3dd1187947&loc=eyJsIjoi5rSq5bGx5Yy6IiwiciI6Iua5luWMl%2BecgSIsInIyIjoi5q2m5rGJ5biCIiwiYyI6IuS4reWNjuS6uuawkeWFseWSjOWbvSIsImkiOiJDTiIsImciOiJ6aC1jbiIsIngiOiIxMTQuMzQzOTg2NTExMjMwNDciLCJ5IjoiMzAuNTAwMDY4NjY0NTUwNzgifQ%3D%3D&weadegreetype=C">天气</a>
+        <a href="https://www.msn.cn/zh-cn/shopping?ocid=msedgntphdr&cvid=6559d1e13e704a27bfaaf86cc3371057&msnrid=6559d1e13e704a27bfaaf86cc3371057">购物</a>
+        <a href="https://www.msn.cn/zh-cn/health?ocid=msedgntphdr&cvid=6559d2c7e26449608b8c04abd755896c">健康</a>
+        <a href="https://www.msn.cn/zh-cn/traffic?ocid=msedgntphdr&cvid=6559d2d91ebe4d228b2db7b45ec80d82">交通</a>
+        <a href="https://www.msn.cn/zh-cn/news/topic/chatgpt?ocid=msedgntphdr&cvid=6559d2e317f94e56aa66ed4a8b5b0bae">ChatGPT</a>
+    </nav>
+</header>
+ <div class="big2">
+	 <a href="https://www.bilibili.com/">
+	     <img src="img/哔哩哔哩.png" width="20px" height="20px" alt="哔哩哔哩">哔哩哔哩
+		 <a href="https://www.bilibili.com/">
+		     <img src="img/1.jpg" width="20px" height="20px" alt="哔哩哔哩">巴拉巴拉
+			 <a href="https://www.bilibili.com/">
+			     <img src="img/3.jpg" width="20px" height="20px" alt="哔哩哔哩">霹雳霹雳
+				 <a href="https://www.bilibili.com/">
+				     <img src="img/4.jpg" width="20px" height="20px" alt="哔哩哔哩">哗啦哗啦
+					 <a href="https://www.bilibili.com/">
+					     <img src="img/5.jpg" width="20px" height="20px" alt="哔哩哔哩">嘎啦嘎啦
+						 <a href="https://www.bilibili.com/">
+						     <img src="img/6.jpg"width="20px" height="20px" alt="哔哩哔哩">物理物理
+							 <a href="https://www.bilibili.com/">
+							     <img src="img/7.jpg" width="20px" height="20px" alt="哔哩哔哩">那里红豆
+								 <a href="https://www.bilibili.com/">
+								     <img src='img/R.png' width="20px" height="20px" alt="哔哩哔哩">玛丽玛丽
+									 <a href="https://www.bilibili.com/">
+									     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+										 <a href="https://www.bilibili.com/">
+										     <img src='img/11.jpg'width="20px" height="20px" alt="哔哩哔哩">丫丫哈哈
+											 <a href="https://www.bilibili.com/">
+											     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+<br />
+<a href="https://www.bilibili.com/">
+	<img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">必应搜索
+	<a href="https://www.bilibili.com/">
+		<img src="img/但.png"width="20px" height="20px" alt="哔哩哔哩">单位签订
+		<a href="https://www.bilibili.com/">
+			<img src='img/14.jpg'width="20px" height="20px" alt="哔哩哔哩">零零零零
+			<a href="https://www.bilibili.com/">
+				<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">如果为青
+				<a href="https://www.bilibili.com/">
+					<img src="img/动漫.png" width="20px" height="20px" alt="哔哩哔哩">权威性的
+					<a href="https://www.bilibili.com/">
+						<img src="img/图标.png" width="20px" height="20px" alt="哔哩哔哩">如果为去
+						<a href="https://www.bilibili.com/">
+							<img src="img/塑料.png" width="20px" height="20px" alt="哔哩哔哩">如带我去
+							<a href="https://www.bilibili.com/">
+								<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">干撒给我
+								<a href="https://www.bilibili.com/">
+									<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+									<a href="https://www.bilibili.com/">
+										<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+										<a href="https://www.bilibili.com/">
+											<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+<br />
+<a href="https://www.bilibili.com/">
+	<img src="img/天猫.png"width="20px" height="20px" alt="哔哩哔哩">哔哩哔哩
+	<a href="https://www.bilibili.com/">
+		<img src="img/微信.png"width="20px" height="20px" alt="哔哩哔哩">飞洒范德
+		<a href="https://www.bilibili.com/">
+			<img src="img/微博.png"width="20px" height="20px" alt="哔哩哔哩">归属感和
+			<a href="https://www.bilibili.com/">
+				<img src="img/海洋.jpg" width="20px" height="20px" alt="哔哩哔哩">而呵呵更
+				<a href="https://www.bilibili.com/">
+					<img src="img/用户.png"width="20px" height="20px" alt="哔哩哔哩">权威性的
+					<a href="https://www.bilibili.com/">
+						<img src="img/用研.png" width="20px" height="20px" alt="哔哩哔哩">如文化馆
+						<a href="https://www.bilibili.com/">
+							<img src="img/设置.png" width="20px" height="20px" alt="哔哩哔哩">活动回顾
+							<a href="https://www.bilibili.com/">
+								<img src="img/123.jpg" width="20px" height="20px" alt="哔哩哔哩">内地富豪
+								<a href="https://www.bilibili.com/">
+									<img src="img/克苏鲁.jpg"width="20px" height="20px" alt="哔哩哔哩">高温恒温
+									<a href="https://www.bilibili.com/">
+										<img src="img/返回.png" width="20px" height="20px" alt="哔哩哔哩">呵呵突然
+										<a href="https://www.bilibili.com/">
+											<img src="img/塞尔达.jpg" width="20px" height="20px" alt="哔哩哔哩">还是说发
+<br />
+<a href="https://www.bilibili.com/">
+	<img src="img/1119.png"width="20px" height="20px" alt="哔哩哔哩">哔哩哔哩
+	<a href="https://www.bilibili.com/">
+		<img src="img/guan.png"width="20px" height="20px" alt="哔哩哔哩">飞洒范德
+		<a href="https://www.bilibili.com/">
+			<img src="img/yahh.jpg"width="20px" height="20px" alt="哔哩哔哩">归属感和
+			<a href="https://www.bilibili.com/">
+				<img src="img/1.png" width="20px" height="20px" alt="哔哩哔哩">而呵呵更
+				<a href="https://www.bilibili.com/">
+					<img src="img/注射剂-空.png"width="20px" height="20px" alt="哔哩哔哩">权威性的
+					<a href="https://www.bilibili.com/">
+						<img src="img/网易云音乐.png" width="20px" height="20px" alt="哔哩哔哩">如文化馆
+						<a href="https://www.bilibili.com/">
+							<img src="img/设置.png" width="20px" height="20px" alt="哔哩哔哩">活动回顾
+							<a href="https://www.bilibili.com/">
+								<img src="img/123.jpg" width="20px" height="20px" alt="哔哩哔哩">内地富豪
+								<a href="https://www.bilibili.com/">
+									<img src="img/克苏鲁.jpg"width="20px" height="20px" alt="哔哩哔哩">高温恒温
+									<a href="https://www.bilibili.com/">
+										<img src="img/返回.png" width="20px" height="20px" alt="哔哩哔哩">呵呵突然
+										<a href="https://www.bilibili.com/">
+											<img src="img/塞尔达.jpg" width="20px" height="20px" alt="哔哩哔哩">还是说发
+											<br />
+ <a href="https://www.bilibili.com/">
+	     <img src="img/哔哩哔哩.png" width="20px" height="20px" alt="哔哩哔哩">哔哩哔哩
+		 <a href="https://www.bilibili.com/">
+		     <img src="img/1.jpg" width="20px" height="20px" alt="哔哩哔哩">巴拉巴拉
+			 <a href="https://www.bilibili.com/">
+			     <img src="img/3.jpg" width="20px" height="20px" alt="哔哩哔哩">霹雳霹雳
+				 <a href="https://www.bilibili.com/">
+				     <img src="img/4.jpg" width="20px" height="20px" alt="哔哩哔哩">哗啦哗啦
+					 <a href="https://www.bilibili.com/">
+					     <img src="img/5.jpg" width="20px" height="20px" alt="哔哩哔哩">嘎啦嘎啦
+						 <a href="https://www.bilibili.com/">
+						     <img src="img/6.jpg"width="20px" height="20px" alt="哔哩哔哩">物理物理
+							 <a href="https://www.bilibili.com/">
+							     <img src="img/7.jpg" width="20px" height="20px" alt="哔哩哔哩">那里红豆
+								 <a href="https://www.bilibili.com/">
+								     <img src='img/R.png' width="20px" height="20px" alt="哔哩哔哩">玛丽玛丽
+									 <a href="https://www.bilibili.com/">
+									     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+										 <a href="https://www.bilibili.com/">
+										     <img src='img/11.jpg'width="20px" height="20px" alt="哔哩哔哩">丫丫哈哈
+											 <a href="https://www.bilibili.com/">
+											     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+<br />
+<a href="https://www.bilibili.com/">
+	<img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">必应搜索
+	<a href="https://www.bilibili.com/">
+		<img src="img/但.png"width="20px" height="20px" alt="哔哩哔哩">单位签订
+		<a href="https://www.bilibili.com/">
+			<img src='img/14.jpg'width="20px" height="20px" alt="哔哩哔哩">零零零零
+			<a href="https://www.bilibili.com/">
+				<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">如果为青
+				<a href="https://www.bilibili.com/">
+					<img src="img/动漫.png" width="20px" height="20px" alt="哔哩哔哩">权威性的
+					<a href="https://www.bilibili.com/">
+						<img src="img/图标.png" width="20px" height="20px" alt="哔哩哔哩">如果为去
+						<a href="https://www.bilibili.com/">
+							<img src="img/塑料.png" width="20px" height="20px" alt="哔哩哔哩">如带我去
+							<a href="https://www.bilibili.com/">
+								<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">干撒给我
+								<a href="https://www.bilibili.com/">
+									<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+									<a href="https://www.bilibili.com/">
+										<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+										<a href="https://www.bilibili.com/">
+											<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+<br />
+ <a href="https://www.bilibili.com/">
+	     <img src="img/哔哩哔哩.png" width="20px" height="20px" alt="哔哩哔哩">哔哩哔哩
+		 <a href="https://www.bilibili.com/">
+		     <img src="img/1.jpg" width="20px" height="20px" alt="哔哩哔哩">巴拉巴拉
+			 <a href="https://www.bilibili.com/">
+			     <img src="img/3.jpg" width="20px" height="20px" alt="哔哩哔哩">霹雳霹雳
+				 <a href="https://www.bilibili.com/">
+				     <img src="img/4.jpg" width="20px" height="20px" alt="哔哩哔哩">哗啦哗啦
+					 <a href="https://www.bilibili.com/">
+					     <img src="img/5.jpg" width="20px" height="20px" alt="哔哩哔哩">嘎啦嘎啦
+						 <a href="https://www.bilibili.com/">
+						     <img src="img/6.jpg"width="20px" height="20px" alt="哔哩哔哩">物理物理
+							 <a href="https://www.bilibili.com/">
+							     <img src="img/7.jpg" width="20px" height="20px" alt="哔哩哔哩">那里红豆
+								 <a href="https://www.bilibili.com/">
+								     <img src='img/R.png' width="20px" height="20px" alt="哔哩哔哩">玛丽玛丽
+									 <a href="https://www.bilibili.com/">
+									     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+										 <a href="https://www.bilibili.com/">
+										     <img src='img/11.jpg'width="20px" height="20px" alt="哔哩哔哩">丫丫哈哈
+											 <a href="https://www.bilibili.com/">
+											     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+<br />
+<a href="https://www.bilibili.com/">
+	<img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">必应搜索
+	<a href="https://www.bilibili.com/">
+		<img src="img/但.png"width="20px" height="20px" alt="哔哩哔哩">单位签订
+		<a href="https://www.bilibili.com/">
+			<img src='img/14.jpg'width="20px" height="20px" alt="哔哩哔哩">零零零零
+			<a href="https://www.bilibili.com/">
+				<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">如果为青
+				<a href="https://www.bilibili.com/">
+					<img src="img/动漫.png" width="20px" height="20px" alt="哔哩哔哩">权威性的
+					<a href="https://www.bilibili.com/">
+						<img src="img/图标.png" width="20px" height="20px" alt="哔哩哔哩">如果为去
+						<a href="https://www.bilibili.com/">
+							<img src="img/塑料.png" width="20px" height="20px" alt="哔哩哔哩">如带我去
+							<a href="https://www.bilibili.com/">
+								<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">干撒给我
+								<a href="https://www.bilibili.com/">
+									<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+									<a href="https://www.bilibili.com/">
+										<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+										<a href="https://www.bilibili.com/">
+											<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+<br />
+ <a href="https://www.bilibili.com/">
+	     <img src="img/哔哩哔哩.png" width="20px" height="20px" alt="哔哩哔哩">哔哩哔哩
+		 <a href="https://www.bilibili.com/">
+		     <img src="img/1.jpg" width="20px" height="20px" alt="哔哩哔哩">巴拉巴拉
+			 <a href="https://www.bilibili.com/">
+			     <img src="img/3.jpg" width="20px" height="20px" alt="哔哩哔哩">霹雳霹雳
+				 <a href="https://www.bilibili.com/">
+				     <img src="img/4.jpg" width="20px" height="20px" alt="哔哩哔哩">哗啦哗啦
+					 <a href="https://www.bilibili.com/">
+					     <img src="img/5.jpg" width="20px" height="20px" alt="哔哩哔哩">嘎啦嘎啦
+						 <a href="https://www.bilibili.com/">
+						     <img src="img/6.jpg"width="20px" height="20px" alt="哔哩哔哩">物理物理
+							 <a href="https://www.bilibili.com/">
+							     <img src="img/7.jpg" width="20px" height="20px" alt="哔哩哔哩">那里红豆
+								 <a href="https://www.bilibili.com/">
+								     <img src='img/R.png' width="20px" height="20px" alt="哔哩哔哩">玛丽玛丽
+									 <a href="https://www.bilibili.com/">
+									     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+										 <a href="https://www.bilibili.com/">
+										     <img src='img/11.jpg'width="20px" height="20px" alt="哔哩哔哩">丫丫哈哈
+											 <a href="https://www.bilibili.com/">
+											     <img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">妈妈哈哈
+<br />
+<a href="https://www.bilibili.com/">
+	<img src="img/锁.png"width="20px" height="20px" alt="哔哩哔哩">必应搜索
+	<a href="https://www.bilibili.com/">
+		<img src="img/但.png"width="20px" height="20px" alt="哔哩哔哩">单位签订
+		<a href="https://www.bilibili.com/">
+			<img src='img/14.jpg'width="20px" height="20px" alt="哔哩哔哩">零零零零
+			<a href="https://www.bilibili.com/">
+				<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">如果为青
+				<a href="https://www.bilibili.com/">
+					<img src="img/动漫.png" width="20px" height="20px" alt="哔哩哔哩">权威性的
+					<a href="https://www.bilibili.com/">
+						<img src="img/图标.png" width="20px" height="20px" alt="哔哩哔哩">如果为去
+						<a href="https://www.bilibili.com/">
+							<img src="img/塑料.png" width="20px" height="20px" alt="哔哩哔哩">如带我去
+							<a href="https://www.bilibili.com/">
+								<img src='img/QQ.png' width="20px" height="20px" alt="哔哩哔哩">干撒给我
+								<a href="https://www.bilibili.com/">
+									<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+									<a href="https://www.bilibili.com/">
+										<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+										<a href="https://www.bilibili.com/">
+											<img src="img/多云.png" width="20px" height="20px" alt="哔哩哔哩">买买买你
+<br /> </div>
+ <div class="big3">
+	   <nav>
+	         <a href="#">天气</a>
+	         <a href="#">地图</a>
+	         <a href="#">交通状况</a>
+	         <a href="#">汇率换算</a>
+	         <a href="#">理财工具</a>
+	         <a href="#">健身工具</a>
+	         <a href="#">中超排行榜</a>
+	         <a href="#">词典</a>
+	         <a href="#">必应词典</a>
+	         <a href="#">有道词典</a>
+	         <a href="#">韦氏词典</a>
+	         <a href="#">柯林斯词典</a>
+	         <a href="#">剑桥词典</a>
+	         <a href="#">朗文词典</a>
+	         <a href="#">谷歌翻译</a>
+	         <a href="#">银行</a>
+	         <a href="#">工商银行</a>
+	         <a href="#">建设银行</a>
+	         <a href="#">农业银行</a>
+	         <a href="#">中国银行</a>
+	         <a href="#">交通银行</a>
+	         <a href="#">招商银行</a>
+	         <a href="#">邮储银行</a>
+	         <a href="#">新闻</a>
+	         <a href="#">新浪新闻</a>
+	         <a href="#">微博</a>
+	         <a href="#">搜狐新闻</a>
+	         <a href="#">新华网</a>
+	         <a href="#">腾讯新闻</a>
+	         <a href="#">中国日报</a>
+	         <a href="#">头条新闻</a>
+	         <a href="#">体育</a>
+	         <a href="#">新浪体育</a>
+	         <a href="#">体育直播</a>
+	         <a href="#">腾讯体育</a>
+	         <a href="#">搜狐体育</a>
+	         <a href="#">央视网体育</a>
+	         <a href="#">直播吧</a>
+	         <a href="#">网易体育</a>
+	         <a href="#">财经</a>
+	         <a href="#">东方财富</a>
+	         <a href="#">新浪财经</a>
+	         <a href="#">和讯网</a>
+	         <a href="#">出国留学网</a>
+	         <a href="#">证券之星</a>
+	         <a href="#">中国经济网</a>
+	         <a href="#">第一财经</a>
+	         <a href="#">购物</a>
+	         <a href="#">天猫</a>
+	         <a href="#">京东</a>
+	         <a href="#">聚划算</a>
+	         <a href="#">唯品会</a>
+	         <a href="#">爱淘宝</a>
+	         <a href="#">微软官方商城</a>
+	         <a href="#">网易考拉</a>
+	         <a href="#">旅游</a>
+	         <a href="#">Booking酒店</a>
+	         <a href="#">携程网</a>
+	         <a href="#">12306</a>
+	         <a href="#">去哪儿网</a>
+	         <a href="#">马蜂窝</a>
+	         <a href="#">穷游网</a>
+	         <a href="#">好订网</a>
+	         <a href="#">科技</a>
+	         <a href="#">太平洋电脑网</a>
+	         <a href="#">IT168</a>
+	         <a href="#">IT之家</a>
+	         <a href="#">中关村在线</a>
+	         <a href="#">天极网</a>
+	         <a href="#">cnBeta</a>
+	         <a href="#">hao123</a>
+	         <a href="#">汽车</a>
+	         <a href="#">易车</a>
+	         <a href="#">汽车之家</a>
+	         <a href="#">太平洋汽车网</a>
+	         <a href="#">网上车市</a>
+	         <a href="#">新浪汽车</a>
+	         <a href="#">搜狐汽车</a>
+	         <a href="#">淘车</a>
+	         <a href="#">文学</a>
+	         <a href="#">晋江原创网</a>
+	         <a href="#">起点中文网</a>
+	         <a href="#">纵横中文网</a>
+	         <a href="#">网易云阅读</a>
+	         <a href="#">17K小说网</a>
+	         <a href="#">红薯网</a>
+	         <a href="#">小故事网</a>
+	         <a href="#">邮箱&音乐</a>
+	         <a href="#">Outlook邮箱</a>
+	         <a href="#">QQ邮箱</a>
+	         <a href="#">163邮箱</a>
+	         <a href="#">虾米音乐</a>
+	         <a href="#">QQ音乐</a>
+	         <a href="#">网易云音乐</a>
+	         <a href="#">喜马拉雅FM</a>
+	         <a href="#">社区</a>
+	         <a href="#">新浪微博</a>
+	         <a href="#">QQ空间</a>
+	         <a href="#">百度贴吧</a>
+	         <a href="#">知乎</a>
+	         <a href="#">瑞丽网</a>
+	         <a href="#">女人志</a>
+	         <a href="#">VOGUE时尚</a>
+	         <a href="#">军事</a>
+	         <a href="#">凤凰军事</a>
+	         <a href="#">新浪军事</a>
+	         <a href="#">头条军事</a>
+	         <a href="#">米尔军情</a>
+	         <a href="#">网易军事</a>
+	         <a href="#">环球军事</a>
+	         <a href="#">新华军事</a>
+	         <a href="#">视频</a>
+	         <a href="#">爱奇艺</a>
+	         <a href="#">优酷网</a>
+	         <a href="#">腾讯视频</a>
+	         <a href="#">芒果TV</a>
+	         <a href="#">哔哩哔哩</a>
+	         <a href="#">虎牙直播</a>
+	         <a href="#">斗鱼直播</a>
+	     </nav>
+ </div>
+
+
+
+</div>	
+</body>
+</html>
